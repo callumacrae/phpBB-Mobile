@@ -129,7 +129,7 @@
 		else
 		{
 			$this->img_array = $this->fetch_imageset_cfg('mobile');
-			$this->img_array += $this->fetch_imageset_cfg('mobile', true);
+			$this->img_array = array_merge($this->img_array, $this->fetch_imageset_cfg('mobile', true));
 		}]]></action>
 			</edit>
 			<edit>
@@ -177,8 +177,8 @@
 					);
 				}
 			}		
-			return $img_array;
 		}
+		return $img_array;
 	}]]></action>
 			</edit>
 		</open>
