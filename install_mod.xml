@@ -71,19 +71,19 @@
 		{
 			$user->add_lang('mods/mobile');
 			$this->theme = array(
-				'style_id'	=> '2',
+				'style_id'	=> '2000',
 				'template_storedb' => '0',
 				'template_path' => 'mobile',
-				'template_id' => '2',
+				'template_id' => '2000',
 				'bbcode_bitfield' => '+Ng=',
 				'template_inherits_id' => '0',
 				'template_inherit_path' => '',
 				'theme_path' => 'mobile',
 				'theme_name' => 'phpBB iPhone',
 				'theme_storedb' => '0',
-				'theme_id' => '2',
+				'theme_id' => '2000',
 				'imageset_path' => 'mobile',
-				'imageset_id' => '2',
+				'imageset_id' => '2000',
 				'imageset_name' => 'phpBB iPhone',
 				);
 		}
