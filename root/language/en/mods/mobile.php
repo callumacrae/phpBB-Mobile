@@ -41,6 +41,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'MOBILE_ENABLE_QUICK'		=> 'Quick reply must be enabled to reply',
 	'MOBILE_GOTO_DESKTOP'		=> 'Please log on to a computer to use this function.',
+	'MOBILE_DESKTOP'			=> 'Disable phpBB Mobile',
 ));
 
 ?>

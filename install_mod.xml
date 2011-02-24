@@ -27,6 +27,7 @@
 	<action-group>
 		<copy>
 			<file from="root/adm/style/acp_mobile.html" to="adm/style/acp_mobile.html"/>
+			<file from="root/includes/mobile.php" to="includes/mobile.php"/>
 			<file from="root/includes/acp/acp_mobile.php" to="includes/acp/acp_mobile.php"/>
 			<file from="root/includes/acp/info/acp_mobile.php" to="includes/acp/info/acp_mobile.php"/>
 			<file from="root/language/en/mods/info_acp_mobile.php" to="language/en/mods/info_acp_mobile.php"/>
@@ -36,6 +37,14 @@
 			<file from="root/umil/*.*" to="umil/*.*"/>
 			<file from="root/styles/mobile/*.*" to="styles/mobile/*.*"/>
 		</copy>
+				<open src="common.php">
+			<edit>
+				<find><![CDATA[			@include($phpbb_root_path . 'includes/hooks/' . $hook . '.' . $phpEx);
+}]]></find>
+				<action type="after-add"><![CDATA[//phpBB Mobile
+require($phpbb_root_path . 'includes/mobile.' . $phpEx);]]></action>
+			</edit>
+		</open>
 		<open src="includes/session.php">
 			<edit>
 				<find><![CDATA[		global $db, $template, $config, $auth, $phpEx, $phpbb_root_path, $cache;]]></find>
@@ -66,7 +75,9 @@
 		$this->theme = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);]]></find>
 				<action type="replace-with"><![CDATA[		// START PHPBB MOBILE
-		$this->mobile_style = (isset($config['mobile_enabled']) && $config['mobile_enabled'] && preg_match($config['mobile_agents'], $this->browser) && $auth->acl_get('u_mobile'));
+		$mobile_enabled = request_var($config['cookie_name'] . '_mobile', true, false, true);
+		$mobile_override = request_var('mobile_disable', (bool) false);
+		$this->mobile_style = $config['mobile_enabled'] && preg_match($config['mobile_agents'], $this->browser) && $auth->acl_get('u_mobile') && $mobile_enabled && !$mobile_override;
 		if ($this->mobile_style)
 		{
 			$user->add_lang('mods/mobile');
@@ -130,6 +141,10 @@
 		{
 			$this->img_array = $this->fetch_imageset_cfg('mobile');
 			$this->img_array = array_merge($this->img_array, $this->fetch_imageset_cfg('mobile', true));
+
+			$template->assign_vars(array(
+				'U_DESKTOP' 			=> append_sid($user->page['page'], "mobile_disable=1"),
+			));
 		}]]></action>
 			</edit>
 			<edit>
