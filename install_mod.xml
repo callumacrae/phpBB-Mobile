@@ -77,7 +77,7 @@ require($phpbb_root_path . 'includes/mobile.' . $phpEx);]]></action>
 				<action type="replace-with"><![CDATA[		// START PHPBB MOBILE
 		$mobile_enabled = request_var($config['cookie_name'] . '_mobile', true, false, true);
 		$mobile_override = request_var('mobile_disable', (bool) false);
-		$this->mobile_style = $config['mobile_enabled'] && preg_match($config['mobile_agents'], $this->browser) && $auth->acl_get('u_mobile') && $mobile_enabled && !$mobile_override;
+		$this->mobile_style = isset($config['mobile_enabled']) && $config['mobile_enabled'] && preg_match($config['mobile_agents'], $this->browser) && $auth->acl_get('u_mobile') && $mobile_enabled && !$mobile_override;
 		if ($this->mobile_style)
 		{
 			$user->add_lang('mods/mobile');
