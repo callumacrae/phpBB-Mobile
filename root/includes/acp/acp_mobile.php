@@ -32,7 +32,7 @@ class acp_mobile
 		$mobile_enabled = request_var('enabled', false);
 		$mobile_agents = request_var('agents', (string) false);
 		
-		if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			set_config('mobile_agents', $mobile_agents);
 			set_config('mobile_enabled', $mobile_enabled);
